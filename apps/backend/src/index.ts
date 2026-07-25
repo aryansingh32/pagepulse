@@ -9,9 +9,18 @@ const app = new Hono<{ Bindings: Env }>();
 app.use("*", logger());
 
 app.use("*", async (c, next) => {
-  const allowed = (c.env.ALLOWED_ORIGINS ?? "").split(",").map((o) => o.trim());
+  const allowed = (c.env.ALLOWED_ORIGINS ?? "").split(",").map((o) => o.trim()).filter(Boolean);
   return cors({
-    origin: allowed.length > 0 ? allowed : "*",
+    origin: (origin) => {
+      if (!origin) return "*";
+      if (allowed.length === 0 || allowed.includes("*") || allowed.includes(origin)) {
+        return origin;
+      }
+      if (origin.endsWith(".pages.dev")) {
+        return origin;
+      }
+      return allowed[0] || "*";
+    },
     allowMethods: ["GET", "POST", "OPTIONS"],
     allowHeaders: ["Content-Type"],
   })(c, next);
