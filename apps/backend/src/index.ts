@@ -8,23 +8,16 @@ const app = new Hono<{ Bindings: Env }>();
 
 app.use("*", logger());
 
-app.use("*", async (c, next) => {
-  const allowed = (c.env.ALLOWED_ORIGINS ?? "").split(",").map((o) => o.trim()).filter(Boolean);
-  return cors({
-    origin: (origin) => {
-      if (!origin) return "*";
-      if (allowed.length === 0 || allowed.includes("*") || allowed.includes(origin)) {
-        return origin;
-      }
-      if (origin.endsWith(".pages.dev")) {
-        return origin;
-      }
-      return allowed[0] || "*";
-    },
+// Allow CORS from any origin so Page Pulse frontend (and preview deployments) can query the API seamlessly
+app.use(
+  "*",
+  cors({
+    origin: "*",
     allowMethods: ["GET", "POST", "OPTIONS"],
-    allowHeaders: ["Content-Type"],
-  })(c, next);
-});
+    allowHeaders: ["Content-Type", "Authorization"],
+    maxAge: 86400,
+  })
+);
 
 app.get("/", (c) => c.json({ name: "Page Pulse API", status: "ok" }));
 app.get("/api/health", (c) => c.json({ status: "ok", timestamp: new Date().toISOString() }));
