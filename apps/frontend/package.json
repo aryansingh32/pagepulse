@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "typecheck": "tsc -b --noEmit",
     "lint": "eslint . --ext ts,tsx",
-    "deploy": "pnpm build && wrangler pages deploy dist --project-name=page-pulse"
+    "deploy": "pnpm build && wrangler pages deploy dist --project-name=page-pulse",
+    "deploy:pages": "pnpm build && wrangler pages deploy dist --project-name=page-pulse"
   },
   "dependencies": {
     "@page-pulse/shared": "workspace:*",

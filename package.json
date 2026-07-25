@@ -9,8 +9,8 @@
     "build": "pnpm --filter @page-pulse/shared build && pnpm --filter @page-pulse/frontend build",
     "build:frontend": "pnpm --filter @page-pulse/frontend build",
     "build:shared": "pnpm --filter @page-pulse/shared build",
-    "deploy:frontend": "pnpm --filter @page-pulse/frontend deploy",
-    "deploy:backend": "pnpm --filter @page-pulse/backend deploy",
+    "deploy:frontend": "pnpm --filter @page-pulse/frontend run deploy",
+    "deploy:backend": "pnpm --filter @page-pulse/backend run deploy",
     "lint": "pnpm -r lint",
     "typecheck": "pnpm -r typecheck"
   },
