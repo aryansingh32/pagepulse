@@ -1,0 +1,21 @@
+name = "page-pulse-api"
+main = "src/index.ts"
+compatibility_date = "2024-11-01"
+compatibility_flags = ["nodejs_compat"]
+
+[observability]
+enabled = true
+
+# Allowed origin(s) for CORS. Update to your deployed Pages URL(s),
+# comma-separated (e.g. "https://page-pulse.pages.dev,https://pagepulse.app").
+[vars]
+ALLOWED_ORIGINS = "http://localhost:5173"
+
+# ---------------------------------------------------------------------------
+# Per-environment overrides. Deploy with: wrangler deploy --env production
+# ---------------------------------------------------------------------------
+[env.production]
+name = "page-pulse-api-production"
+
+[env.production.vars]
+ALLOWED_ORIGINS = "https://page-pulse.pages.dev"

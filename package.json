@@ -1,0 +1,24 @@
+{
+  "name": "page-pulse",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Page Pulse — instant website audits, built for Digital Heroes Training Task",
+  "scripts": {
+    "dev:frontend": "pnpm --filter @page-pulse/frontend dev",
+    "dev:backend": "pnpm --filter @page-pulse/backend dev",
+    "build": "pnpm --filter @page-pulse/shared build && pnpm --filter @page-pulse/frontend build",
+    "build:frontend": "pnpm --filter @page-pulse/frontend build",
+    "build:shared": "pnpm --filter @page-pulse/shared build",
+    "deploy:frontend": "pnpm --filter @page-pulse/frontend deploy",
+    "deploy:backend": "pnpm --filter @page-pulse/backend deploy",
+    "lint": "pnpm -r lint",
+    "typecheck": "pnpm -r typecheck"
+  },
+  "packageManager": "pnpm@9.1.0",
+  "engines": {
+    "node": ">=18.17.0"
+  },
+  "dependencies": {
+    "pnpm": "^10.34.5"
+  }
+}

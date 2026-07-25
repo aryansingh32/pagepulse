@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  Page Pulse design tokens.
+  Dark mode is the primary surface — a deep navy scanner console.
+  Light mode mirrors the same accent so the product reads as one identity.
+*/
+@layer base {
+  :root {
+    --background: 220 32% 6%;
+    --foreground: 210 20% 94%;
+    --surface: 222 28% 10%;
+    --card: 222 26% 11%;
+    --card-foreground: 210 20% 94%;
+    --muted: 220 18% 16%;
+    --muted-foreground: 216 12% 65%;
+    --border: 220 18% 20%;
+    --input: 220 18% 20%;
+    --ring: 172 66% 50%;
+    --primary: 172 66% 50%;
+    --primary-foreground: 222 40% 8%;
+    --secondary: 243 75% 72%;
+    --secondary-foreground: 222 40% 8%;
+    --success: 158 64% 52%;
+    --info: 213 94% 68%;
+    --warning: 38 92% 55%;
+    --danger: 0 91% 71%;
+    --radius: 0.9rem;
+  }
+
+  .light {
+    --background: 210 33% 98%;
+    --foreground: 222 40% 11%;
+    --surface: 0 0% 100%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 40% 11%;
+    --muted: 210 25% 94%;
+    --muted-foreground: 220 12% 40%;
+    --border: 214 20% 88%;
+    --input: 214 20% 88%;
+    --ring: 172 66% 38%;
+    --primary: 172 74% 34%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 243 60% 55%;
+    --secondary-foreground: 0 0% 100%;
+    --success: 158 60% 34%;
+    --info: 213 80% 46%;
+    --warning: 32 90% 42%;
+    --danger: 0 72% 48%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -10%, hsl(var(--primary) / 0.16), transparent),
+      radial-gradient(ellipse 60% 40% at 100% 0%, hsl(var(--secondary) / 0.10), transparent);
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.3);
+  }
+
+  /* Visible, deliberate focus ring for keyboard users. */
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-card/60 backdrop-blur-xl border border-border/60;
+  }
+
+  .glass-strong {
+    @apply bg-card/80 backdrop-blur-2xl border border-border;
+  }
+
+  .text-gradient {
+    background: linear-gradient(90deg, hsl(var(--foreground)), hsl(var(--primary)) 60%, hsl(var(--secondary)));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      hsl(var(--muted)) 0%,
+      hsl(var(--muted) / 0.4) 50%,
+      hsl(var(--muted)) 100%
+    );
+    background-size: 800px 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
